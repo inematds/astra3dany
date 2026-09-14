@@ -15,6 +15,10 @@ O primeiro mundo ensina **"IA no dia a dia: três hábitos que evitam problemas"
 
 Segue a receita do field guide **Build a Learning World** (Mark Kashef, comunidade Early AI Adopters): seis partes, ritmo de câmera *chegar → aproximar → demonstrar → segurar*, cards sincronizados e checklist de aceite. O material de estudo está em [`docs/`](docs/00-INDICE.md); a síntese em [`docs/05-sintese.md`](docs/05-sintese.md); o plano em [`PLANO.md`](PLANO.md); as evidências de inspeção em [`evidence/revisao.md`](evidence/revisao.md).
 
+## 📖 Guia de uso
+
+Guia completo (landing + passo a passo): **https://inematds.github.io/astra3dany/guia/**
+
 ## Instalação
 
 Pré-requisitos:
