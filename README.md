@@ -1,5 +1,7 @@
 # astra3dany — um mundo 3D pra ensinar qualquer coisa
 
+[![astra3dany](guia/assets/banner.jpg)](https://inematds.github.io/astra3dany/guia/)
+
 **Ao vivo:** https://inematds.github.io/astra3dany/app/ · **Guia de uso:** https://inematds.github.io/astra3dany/guia/
 
 Um "mundo de aprendizagem" em miniatura, no browser: três estações, um mascote-guia, um World Tour ritmado e exploração livre.
