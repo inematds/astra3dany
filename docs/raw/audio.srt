@@ -1,0 +1,752 @@
+1
+00:00:00,000 --> 00:00:03,640
+So in this video, I'm going to walk you through the mental model of how to create 3D worlds
+
+2
+00:00:03,640 --> 00:00:08,520
+like this for educational purposes. And not just for you, whether you want to teach yourself
+
+3
+00:00:08,520 --> 00:00:13,900
+something, you teach a colleague, a class, a client. This, for example, is a world I put
+
+4
+00:00:13,900 --> 00:00:19,940
+together in under an hour and a half of running a combination of Astra and Luna on Macs. They
+
+5
+00:00:19,940 --> 00:00:24,920
+work together to create these step-by-step guides, breaking down some concepts from the
+
+6
+00:00:24,920 --> 00:00:29,640
+Claude Architect certification. So this is showing, let's say, context, and each one of
+
+7
+00:00:29,640 --> 00:00:34,740
+them is being escorted by our little Claude bot. This will keep going and you can click
+
+8
+00:00:34,740 --> 00:00:39,960
+through it, click through the instructions, create a interactive quiz, if you will. And
+
+9
+00:00:39,960 --> 00:00:44,180
+the goal is eventually to create something like this, which took a lot more time, but
+
+10
+00:00:44,180 --> 00:00:49,900
+you can see is very interactive, captures the physics of the light refracting off of our
+
+11
+00:00:49,900 --> 00:00:55,040
+codex instructor here. And you have a very high quality 3D world where if we step into
+
+12
+00:00:55,040 --> 00:00:59,580
+this one, we have our little animation here, a little close up. These are all
+
+13
+00:00:59,580 --> 00:01:03,220
+things that you can orchestrate. And you can see all of these are meant to be
+
+14
+00:01:03,220 --> 00:01:08,840
+interactive. And the more time you put in, the higher the quality of the 3D, what
+
+15
+00:01:08,840 --> 00:01:13,180
+are called blender assets, the better you can get something like this. Now, getting
+
+16
+00:01:13,180 --> 00:01:17,600
+to a point like this might not need 18 hours. It took around 8 million tokens and
+
+17
+00:01:17,600 --> 00:01:23,860
+18 hours on a slash goal using Astra High, which is overkill. You could create a very
+
+18
+00:01:23,860 --> 00:01:28,620
+comprehensive plan, then try to execute it with a lower version of Astra, maybe a high
+
+19
+00:01:28,620 --> 00:01:32,920
+version of soul. Or if you really want to try, you can try Luna. But I have tried
+
+20
+00:01:32,920 --> 00:01:37,300
+this myself in creating that cloud version I just showed you. And it wasn't that
+
+21
+00:01:37,300 --> 00:01:44,560
+great. So in this specific arena of 3D models matter. So I would say Astra has to
+
+22
+00:01:44,560 --> 00:01:49,640
+be involved to make it look good, especially when it to get this good. Now I do make
+
+23
+00:01:49,640 --> 00:01:54,400
+this code available to you exclusively for the community. So everything in here, if you
+
+24
+00:01:54,400 --> 00:01:59,160
+want to be able to recreate my game, all of this will be here. So if you want to
+
+25
+00:01:59,160 --> 00:02:03,020
+draw on it, you want to create your own version and skip all the steps of dealing
+
+26
+00:02:03,020 --> 00:02:08,020
+with what I dealt with, which is horrific. This was a cloud. This was a sad cloud at
+
+27
+00:02:08,020 --> 00:02:12,780
+the beginning. And this took many iterations to get perfectly right. Everything from the
+
+28
+00:02:12,780 --> 00:02:17,020
+look and feel to the options, the fact that the options actually work, the map and
+
+29
+00:02:17,020 --> 00:02:21,840
+everything in between. And the ability to have not only the world tour, but a short tour and
+
+30
+00:02:21,840 --> 00:02:25,840
+something like starting a walkthrough that takes you step by step through every
+
+31
+00:02:25,840 --> 00:02:30,240
+one of these stations. And the ability to obviously have layers. So we're looking at
+
+32
+00:02:30,240 --> 00:02:35,880
+one 3D layer here. Once we touch these, even the fluency and the latency through
+
+33
+00:02:35,880 --> 00:02:39,860
+which we touch them, the size of the game and making sure it can render on a browser,
+
+34
+00:02:40,280 --> 00:02:45,600
+all of that comes down to the prompting and the design. So with that, we have a
+
+35
+00:02:45,600 --> 00:02:50,680
+little tour of this hypothetical world here. This ends off with three stations just to
+
+36
+00:02:50,680 --> 00:02:55,040
+prove the concept. But I want to walk you through what you'll need to make sure that if you want
+
+37
+00:02:55,040 --> 00:03:00,500
+to go down this path, it's going to be a fruitful one. So three things are a control gate
+
+38
+00:03:00,500 --> 00:03:05,780
+and context drawers and evidence check. All right. So if we scroll through this guide here,
+
+39
+00:03:05,840 --> 00:03:11,320
+we have six core parts you need to focus on. Step number one are the core assets. So if you want
+
+40
+00:03:11,320 --> 00:03:18,740
+a lot of time spent to make that codex mascot as shiny as possible, the cloud mascot, whatever it is
+
+41
+00:03:18,740 --> 00:03:23,880
+that is going to be the leader of this world, they're going to bring people into, you want to
+
+42
+00:03:23,880 --> 00:03:30,760
+spend time giving assets, actual images. Let's say I gave three versions of the codex logo. And then we
+
+43
+00:03:30,760 --> 00:03:36,620
+just spent an hour making sure that was perfect, because if you got that perfect, everything else
+
+44
+00:03:36,620 --> 00:03:42,080
+can be improved. But initially, the cloud version that I had, I think I have a picture of it just to
+
+45
+00:03:42,080 --> 00:03:47,460
+show you. When I first started this project a few hours ago, because I wanted to prove that I could
+
+46
+00:03:47,460 --> 00:03:51,520
+shorten the time between 18 hours to a couple hours. This is what it looked like with a very
+
+47
+00:03:51,520 --> 00:03:58,260
+low quality cloud, we had a depressing backdrop. These were horrific text was stretched out. So
+
+48
+00:03:58,260 --> 00:04:04,080
+all of this was a complete no go. Now we have something a lot better. The next part is staging
+
+49
+00:04:04,080 --> 00:04:09,440
+and lighting. So when it comes to how the objects interact with light, like you would have seen on
+
+50
+00:04:09,440 --> 00:04:15,200
+the very polished version using codex, that becomes really important. And you want it to be able to plan.
+
+51
+00:04:15,200 --> 00:04:21,260
+So you want to go back and forth with Astra until it creates such a comprehensive plan. And I want
+
+52
+00:04:21,260 --> 00:04:28,760
+to give you not only the plan within this guide right here, that's in here as well. But on top of
+
+53
+00:04:28,760 --> 00:04:35,060
+that, there's also a plan to create this little workshop. I'll give you both of them. So with that,
+
+54
+00:04:35,320 --> 00:04:41,260
+another thing we have is the camera angle. So will it be a zoomed in camera angle? Will it come from
+
+55
+00:04:41,260 --> 00:04:47,300
+top? When you go from the top, if you want to give a world tour of your entire 3D world, will it take
+
+56
+00:04:47,300 --> 00:04:53,860
+different shots from different angles? And if you do a 360, does that 360 even exist? Meaning, is there
+
+57
+00:04:53,860 --> 00:05:01,220
+something behind the camera? Or do you only have a 3D world on one side of the canvas? Could you build
+
+58
+00:05:01,220 --> 00:05:06,460
+something for a university? Could you build something for a high school to help kids understand physics,
+
+59
+00:05:06,460 --> 00:05:11,420
+for example? Is this doable? And is this something that you can commercialize? The latter, I'll say
+
+60
+00:05:11,420 --> 00:05:16,920
+yes. It is a matter of how good quality it is. And a lot of these things will be done maybe as
+
+61
+00:05:16,920 --> 00:05:23,440
+complements to existing courses and modules in various educational programs. Now, the next are the
+
+62
+00:05:23,440 --> 00:05:30,000
+guide and the interface. So explaining the objects and explaining what will happen. So if I want to click
+
+63
+00:05:30,000 --> 00:05:35,260
+on station number three, and station number three is about models, I want to be able to have this little
+
+64
+00:05:35,260 --> 00:05:42,140
+lottery picker where I click on something and some animation happens as a result. So telling it when this
+
+65
+00:05:42,140 --> 00:05:49,460
+happens, this should happen. The more comprehensive and laid out every single interaction and action is, the
+
+66
+00:05:49,460 --> 00:05:54,720
+higher the likelihood that when you leave it overnight running, that you'll get what you're expecting. And this is
+
+67
+00:05:54,720 --> 00:05:59,340
+probably the most important thing, which is testing and delivery. I'm gonna put like a million arrows here.
+
+68
+00:06:00,000 --> 00:06:05,020
+So, since you have used something like Codex, and if you ask me, is this something you can achieve
+
+69
+00:06:05,020 --> 00:06:09,940
+with local models? Potentially. But I would say like you're gonna have to fight tooth and nail
+
+70
+00:06:09,940 --> 00:06:15,120
+to get even close to the quality. Claude struggles with this too, with Blender. Like it's not bad,
+
+71
+00:06:15,320 --> 00:06:20,620
+but it definitely struggles. Fable is capable. I tried it on that. But it still was missing something.
+
+72
+00:06:20,800 --> 00:06:26,620
+Whereas with Astra, it just gets it. So with testing and delivery, the value here is that because
+
+73
+00:06:26,620 --> 00:06:31,600
+computer use is a beast when it comes to Codex. When you combine computer use with its internal
+
+74
+00:06:31,600 --> 00:06:36,780
+browser, it will be able to not only click around the entire world, but you can tell it,
+
+75
+00:06:36,980 --> 00:06:42,980
+I want to optimize for this level of latency. I want to go through every scene and make sure that
+
+76
+00:06:42,980 --> 00:06:48,860
+it's completely smooth. And if someone's scrolling through, it's very gradual. The more gradual and
+
+77
+00:06:48,860 --> 00:06:54,120
+well paced and buttery the experience you want to be, the more it has to plan out different frames
+
+78
+00:06:54,120 --> 00:06:59,300
+and go through them. On top of that, when it comes to testing it from different browsers,
+
+79
+00:06:59,580 --> 00:07:05,260
+different mobile devices, and different landscape or horizontal, those are additional tests you want
+
+80
+00:07:05,260 --> 00:07:14,780
+to throw in. So I would say of the total time, around 40% is spent building, and 60% is spent actually
+
+81
+00:07:14,780 --> 00:07:21,720
+testing. And the hardest part, just like any form of code base, is ideally you want to get as close
+
+82
+00:07:21,720 --> 00:07:28,560
+as possible to your final destination on your first shot. Meaning, the better you have the planning,
+
+83
+00:07:28,780 --> 00:07:33,960
+the less you're going to spend time reworking different parts of the canvas. Because you can
+
+84
+00:07:33,960 --> 00:07:40,780
+imagine, there has to be a level of cohesion where, let's say you wanted to fix this entire corner,
+
+85
+00:07:40,780 --> 00:07:46,160
+right? You'd now be inconsistent with the rest of the world here. So if you go here,
+
+86
+00:07:46,680 --> 00:07:52,680
+right, we have this little divider that is a proxy for dividing of worlds. If I told it the divider
+
+87
+00:07:52,680 --> 00:07:58,480
+after, it would struggle. Especially if we're looking at something like this, where each one is
+
+88
+00:07:58,480 --> 00:08:03,040
+not only color coded on the back end, each one has a theme, and each one knows to have four sections.
+
+89
+00:08:03,940 --> 00:08:10,760
+Ideally, you wouldn't want to create 100 at once or 40 at once. You would want to create one to five,
+
+90
+00:08:11,160 --> 00:08:15,660
+make sure you sign off on it, similar to what I did here. Now, this one is like the version,
+
+91
+00:08:16,280 --> 00:08:21,740
+I'm not going to say version four. Yeah, I think version four or five. And it's still missing a lot.
+
+92
+00:08:21,820 --> 00:08:26,200
+When you compare the look and feel, you can still zoom in here. You can click around, but there's no
+
+93
+00:08:26,200 --> 00:08:31,680
+depth to this experience because I haven't spent enough time actually developing it. But you can go
+
+94
+00:08:31,680 --> 00:08:39,000
+in that 360 world. It is physics friendly. Meaning, when I turn around here, you can see the word you
+
+95
+00:08:39,000 --> 00:08:43,340
+and teammate is backwards. And you can still see the back of our little clod bot here.
+
+96
+00:08:43,880 --> 00:08:49,380
+But you can add so much more. And you can have this have embedded resources where let's say
+
+97
+00:08:49,380 --> 00:08:55,280
+you click on one of these resources, let's say this run resource, you can have a PDF that pops up
+
+98
+00:08:55,280 --> 00:09:00,380
+right here. And then you can make this into a quiz. You can make it into basically some practices,
+
+99
+00:09:00,380 --> 00:09:06,380
+exam questions. If this was indeed for the clod certification exam, imagine you took all the
+
+100
+00:09:06,380 --> 00:09:12,760
+core principles. And you made separate rooms for it. And then you were able to not only offer
+
+101
+00:09:12,760 --> 00:09:18,760
+normal quizzes, but an interactive 3d quiz where if someone wants to learn through seeing what it is
+
+102
+00:09:18,760 --> 00:09:24,480
+an MCP look like, what does it look like when it sends a request? Beyond just infographics or images
+
+103
+00:09:24,480 --> 00:09:29,920
+or diagrams, you have something that can actually click on. And there's some form of stimuli during
+
+104
+00:09:29,920 --> 00:09:34,980
+the learning process. Now, once you establish testing and delivery, this makes things a lot
+
+105
+00:09:34,980 --> 00:09:39,320
+easier. Like I said before, you want to start off with one to three stations. In this case, I would
+
+106
+00:09:39,320 --> 00:09:43,880
+just do one, see what it looks like. Look at the quality because if you're using something like
+
+107
+00:09:43,880 --> 00:09:50,540
+Luna, you'll quickly see like I did. You know what, even with a plan executed by Astra, that's very
+
+108
+00:09:50,540 --> 00:09:56,940
+fleshed out. The execution matters, the understanding of the physics and combining that with Blender and
+
+109
+00:09:56,940 --> 00:10:02,140
+what's called Babylon. Babylon helps you render whatever you create with Blender on a browser to
+
+110
+00:10:02,140 --> 00:10:06,680
+make it something that you can indeed browse. So a couple of different principles to be aware of is
+
+111
+00:10:06,680 --> 00:10:13,400
+enforcing before acting, meaning you have to create a gate for which every part of this world will pass
+
+112
+00:10:13,400 --> 00:10:19,100
+some test. So you would tell it station one, my definition of success is that when you click on this
+
+113
+00:10:19,100 --> 00:10:25,940
+little MCP icon, that it shoots some form of request and it says a post request and it goes to some
+
+114
+00:10:25,940 --> 00:10:31,760
+semblance of a logo that's a service, let's say it's Candly or Gmail, to show someone what does it
+
+115
+00:10:31,760 --> 00:10:37,200
+look like to create a Gmail connector? What does that look like in practice? Giving guidance to
+
+116
+00:10:37,200 --> 00:10:44,340
+Holmes, in this case, trying to explain what does it look like when the experience hovers over this
+
+117
+00:10:44,340 --> 00:10:50,980
+overall breakdown or in this diagram or this 3D representation and what happens after. Then making
+
+118
+00:10:50,980 --> 00:10:55,700
+sure that it can check frame by frame because what it will do, especially Astra, even after their
+
+119
+00:10:55,700 --> 00:11:02,860
+change is the reason why I used goal is goal overrides lazy behavior. Even after a lot of the
+
+120
+00:11:02,860 --> 00:11:10,000
+fixes with Astra in the last 48 hours, I still find it telling me, you know what, this 3D rendering could
+
+121
+00:11:10,000 --> 00:11:14,840
+be a lot better. And then that's all it does. That's all it says. It doesn't actually take the initiative to
+
+122
+00:11:14,840 --> 00:11:22,680
+go and actually fix it. So goal stops it from being able to stop until everything, all my rubric is
+
+123
+00:11:22,680 --> 00:11:27,640
+satisfied. And my rubric, everything I'm going to make available to you. There's a website from the
+
+124
+00:11:27,640 --> 00:11:34,080
+ChatGPT site that I made for this one. And then there's gonna be one for this one as well. I'm going
+
+125
+00:11:34,080 --> 00:11:39,480
+to make it into both of these worlds here. So you can take a look at them. And for the other one, I have
+
+126
+00:11:39,480 --> 00:11:46,300
+a separate ChatGPT site that I'll tap you into. So with that, if we go to this section, you can see
+
+127
+00:11:46,300 --> 00:11:52,740
+this is a version of the Claude mascot that it was drafting when I told it. It looks pretty dull. This
+
+128
+00:11:52,740 --> 00:11:57,640
+is the hero of our experience. So spend time on it. So it will create a silhouette. They'll create
+
+129
+00:11:57,640 --> 00:12:03,580
+different layers. It will try to look at it from different angles. And then you can keep pushing it
+
+130
+00:12:03,580 --> 00:12:08,480
+to opening it up in its own browser and inspect it from different angles to make sure it satisfies
+
+131
+00:12:08,480 --> 00:12:14,260
+all your core criteria. Now, when it comes to the initial effect, that initial effect, when we click
+
+132
+00:12:14,260 --> 00:12:21,280
+on refresh, and we have that world tour, basically the sex appeal of being able to interact with this
+
+133
+00:12:21,280 --> 00:12:27,440
+with a slow motion lens that zooms into the experience and then takes us very fluidly through
+
+134
+00:12:27,440 --> 00:12:35,060
+the entire process. This was very jagged. It went step by step is almost impossible to look at. So when it
+
+135
+00:12:35,060 --> 00:12:39,280
+comes to building this, you want to think of what's called the arrive shot. The arrive shot is what
+
+136
+00:12:39,280 --> 00:12:46,000
+happens when you first click on that button. The next is the move closer. So how close will the camera
+
+137
+00:12:46,000 --> 00:12:52,440
+get before the experience runs? And then some form of demonstration where if you want this little
+
+138
+00:12:52,440 --> 00:12:58,140
+mascot or this guide or guides for this world, imagine there are a bunch of agents, it can take you to a
+
+139
+00:12:58,140 --> 00:13:05,180
+series of spots, and then you can make it and tell it, I want you to point at x 3d diagram and explain
+
+140
+00:13:05,180 --> 00:13:10,760
+it, maybe grab it, hold it, show something. All of this has to be baked in very similar to doing
+
+141
+00:13:10,760 --> 00:13:19,300
+4k videos or AI generated videos. The more you explain in terms of shots, especially shots with angles
+
+142
+00:13:19,300 --> 00:13:26,260
+and lenses. So if you say, imagine you're using a Canon 35 millimeter lens, if you don't know what
+
+143
+00:13:26,260 --> 00:13:33,840
+that is, you can look it up. And you then shift to a 50 millimeter lens. These kinds of details help
+
+144
+00:13:33,840 --> 00:13:39,200
+you orchestrate in better position exactly what is happening in that scene. And what is the depth and
+
+145
+00:13:39,200 --> 00:13:43,600
+the depth perception look like? And then where does it make sense to hold? You don't want to be a
+
+146
+00:13:43,600 --> 00:13:49,640
+continuous motion, you might want to zoom in, then pause, then go through the world, rotate around all
+
+147
+00:13:49,640 --> 00:13:57,100
+the different assets, and go from there. And if you want to be able to add voice, or music, or both, and
+
+148
+00:13:57,100 --> 00:14:02,260
+have it be fully interactive, like an actual 3d game, then you can add that as well. It's super easy, especially
+
+149
+00:14:02,260 --> 00:14:08,300
+with all the services in the OpenAI ecosystem. And if you don't want to use OpenAI, you could always pipe in
+
+150
+00:14:08,300 --> 00:14:14,860
+something like Gemini to create all the MP3 assets very cheaply, especially now we're at Gemini 3.8
+
+151
+00:14:14,860 --> 00:14:21,260
+flash, eventually it will be Gemini 3.9 flash, etc. And we went over that before. And in terms of
+
+152
+00:14:21,260 --> 00:14:27,100
+describing the decisions, a good example of a bad prompt is build an amazing 3d cloud world with three
+
+153
+00:14:27,100 --> 00:14:33,060
+stations and beautiful animations. Even if you used GPT Astra on ultra, this will not do anything for you
+
+154
+00:14:33,060 --> 00:14:38,280
+example of that same prompt would be create three stations. At each one approach over three seconds,
+
+155
+00:14:38,280 --> 00:14:44,420
+show a readable close up, run one six second demonstration, then hold the result and it's
+
+156
+00:14:44,420 --> 00:14:49,120
+take wait for five seconds. Once you have this running well locally, that's where you want to
+
+157
+00:14:49,120 --> 00:14:53,420
+publish it to something like Vercel, or in this case, I'm using here.now. I'm using it just because
+
+158
+00:14:53,420 --> 00:14:58,780
+it lets you publish a decent amount for free before it has any form of paywall. So if you're just
+
+159
+00:14:58,780 --> 00:15:02,920
+playing around, you want to be able to share this with someone, this is an easy way to do it. And then I
+
+160
+00:15:02,920 --> 00:15:07,820
+have a full checklist for you here in terms of what you want to pay attention to. So the mascot, as it moves,
+
+161
+00:15:07,820 --> 00:15:13,820
+are there shadows? Is there a silhouette? Do the feet actually touch the floor? Is it following the laws of
+
+162
+00:15:13,820 --> 00:15:20,180
+physics, which it's doing a good job of, especially with Astra, less so with other tier models. Next, we have
+
+163
+00:15:20,180 --> 00:15:25,960
+can people follow it? The caption matches the current action, meaning is there a symbiosis between what is
+
+164
+00:15:25,960 --> 00:15:31,240
+showing on screen, what is happening in the animations, and what is the information card on the right hand side?
+
+165
+00:15:31,240 --> 00:15:36,300
+Does every station have a visible before and after? Does the camera hold the result long enough?
+
+166
+00:15:36,960 --> 00:15:42,400
+Next up, can people control it? Allowed me to click on world tour, but I want to be able to scroll in. I
+
+167
+00:15:42,400 --> 00:15:47,480
+want to be able to zoom. I want to be able to go from different ankles, from the top, from the sides.
+
+168
+00:15:47,640 --> 00:15:51,540
+Ideally, I want to be able to go from the bottom as well. Can you click on a reset view? We call this
+
+169
+00:15:51,540 --> 00:15:59,120
+panning. Shift-drag to pan. So knowing the words as well is helpful. So you can even break down the
+
+170
+00:15:59,120 --> 00:16:04,620
+code I'm making available to you. Having it break down every single part, we can see right here.
+
+171
+00:16:04,980 --> 00:16:11,460
+So the entire walkthrough, how it's built. This is the initial product plan. When you go into here,
+
+172
+00:16:11,500 --> 00:16:16,940
+you'll see everything from the Codex mascot to the architecture and lighting, the camera movement,
+
+173
+00:16:16,940 --> 00:16:23,280
+an actual diagram I created with a rubric on what my definition of success is. Just as a disclaimer,
+
+174
+00:16:23,540 --> 00:16:28,780
+I didn't do the exact same thing at all for this version. I tried to shorthand this saying, hey,
+
+175
+00:16:29,320 --> 00:16:35,220
+you see this? You have access to the code base. Go and create this in a fraction of the time,
+
+176
+00:16:35,340 --> 00:16:40,840
+which it did do. It's not beautiful. It's not amazing, but it did do it. Meaning you can take
+
+177
+00:16:40,840 --> 00:16:46,920
+from both of my repos or at least the individual repo, but both of the prompts and repurpose it
+
+178
+00:16:46,920 --> 00:16:53,040
+your own needs. So if we go back here, that's pretty much the core concept. This is the overall
+
+179
+00:16:53,040 --> 00:16:57,980
+build prompt that you'll be able to see. So you click on this. This will walk you through every
+
+180
+00:16:57,980 --> 00:17:03,780
+single section from the overall project brief to the reference handling and scope to deliverables
+
+181
+00:17:03,780 --> 00:17:09,620
+and file structure. Laying this out is super helpful. Then you have everything from the stations
+
+182
+00:17:09,620 --> 00:17:13,700
+to the camera direction and tour timing. And you can take a full read of this and it'll give you
+
+183
+00:17:13,700 --> 00:17:18,140
+everything you need. So hopefully this gives you a good breakdown on how you can apply this.
+
+184
+00:17:18,180 --> 00:17:22,260
+And obviously you don't want to do this for fun. This will take a lot of tokens. So if you have an
+
+185
+00:17:22,260 --> 00:17:26,800
+educational use case, you're working with a company in the edtech space, creating something like this
+
+186
+00:17:26,800 --> 00:17:32,220
+and adding it to your portfolio might be a great lead magnet, a proof of work, or a way that you can
+
+187
+00:17:32,220 --> 00:17:37,100
+get your foot in the door saying, how do you consider teaching these kinds of courses or delivering
+
+188
+00:17:37,100 --> 00:17:39,340
+these assets to your audience in this kind of way.
+

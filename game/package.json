@@ -1,0 +1,25 @@
+{
+  "name": "astra3dany",
+  "version": "0.1.0",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "dev": "vite --host 127.0.0.1 --port 43220",
+    "build": "vite build --base=./",
+    "preview": "vite preview --host 127.0.0.1 --port 43221"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@babylonjs/core": "9.25.0",
+    "@babylonjs/loaders": "9.25.0"
+  },
+  "devDependencies": {
+    "vite": "8.2.2"
+  }
+}

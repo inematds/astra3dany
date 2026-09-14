@@ -1,0 +1,136 @@
+:root {
+  --creme: #f6f4ec; --papel: #fbfaf5; --tinta: #1f2a24; --tinta-2: #4a5a4f; --tinta-3: #77837a; --linha: #dcdfd4;
+  --verde: #2f5b47; --verde-claro: #dce7d9; --ambar: #d27f1e; --ambar-forte: #b46f21; --terracota: #c65a3c; --amarelo: #f2c14e;
+  --sombra: 0 14px 40px rgba(31, 42, 36, 0.09);
+  --topo-h: 62px;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--tinta); background: var(--creme); line-height: 1.45; -webkit-font-smoothing: antialiased; }
+button { font: inherit; cursor: pointer; }
+h1, h2 { margin: 0; letter-spacing: -0.02em; line-height: 1.12; }
+p { margin: 0; }
+.eyebrow { display: block; font-size: 10px; letter-spacing: 1.4px; font-weight: 700; color: var(--tinta-3); }
+.card-label { display: block; font-size: 10px; letter-spacing: 1.2px; font-weight: 700; color: var(--tinta-3); margin-top: 14px; }
+.botao { border: 1px solid var(--linha); background: var(--papel); color: var(--tinta); border-radius: 9px; padding: 9px 14px; font-size: 13px; font-weight: 600; transition: background .15s, border-color .15s; }
+.botao:hover { background: var(--verde-claro); border-color: #c5d2c2; }
+.botao[aria-pressed="true"], .botao.ativa { background: var(--verde); color: #fff; border-color: var(--verde); }
+.botao.primario { background: var(--ambar); border-color: var(--ambar); color: #fff; }
+.botao.primario:hover { background: var(--ambar-forte); border-color: var(--ambar-forte); }
+.botao.grande { width: 100%; padding: 13px 16px; font-size: 15px; }
+.botao:disabled { opacity: .45; cursor: default; }
+.texto-botao { background: none; border: 0; padding: 6px 0; color: var(--tinta-2); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.texto-botao:hover { color: var(--terracota); }
+:focus-visible { outline: 2px solid var(--terracota); outline-offset: 2px; }
+
+/* topo */
+.topo { height: var(--topo-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; border-bottom: 1px solid var(--linha); background: var(--papel); }
+.marca { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.marca strong { display: block; font-size: 15px; letter-spacing: -0.01em; }
+.marca small { display: block; font-size: 11px; color: var(--tinta-3); }
+.mascote-icone { display: inline-grid; place-items: center; width: 36px; height: 30px; border-radius: 9px; background: var(--ambar); color: #1f2a24; font-size: 13px; font-weight: 800; letter-spacing: 1px; flex: none; }
+.topo-nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+/* layout */
+.app { display: grid; grid-template-columns: 1fr clamp(320px, 31vw, 420px); height: calc(100dvh - var(--topo-h)); }
+/* o canvas fica fora do fluxo: o Babylon escreve width/height no elemento a cada resize e, se ele participasse do layout, o grid cresceria em loop */
+.viewport { position: relative; background: #e6eae5; min-width: 0; min-height: 0; overflow: hidden; }
+#world { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; touch-action: none; cursor: grab; }
+#world.dragging { cursor: grabbing; } #world.pan-mode { cursor: move; } #world.pode-clicar { cursor: pointer; }
+#world:focus-visible { outline: 2px solid var(--terracota); outline-offset: -3px; }
+.cena-rotulo { position: absolute; top: 22px; left: 26px; right: 26px; pointer-events: none; }
+.cena-rotulo h2 { font-size: clamp(22px, 2.6vw, 34px); font-weight: 600; margin-top: 6px; color: var(--tinta); }
+.camera-tools { position: absolute; left: 26px; bottom: 48px; right: 26px; pointer-events: none; }
+.camera-buttons { display: inline-flex; border: 1px solid #cbd3c9; background: #f7f6f2ee; border-radius: 9px; overflow: hidden; pointer-events: auto; box-shadow: 0 2px 8px rgba(36, 63, 48, .06); }
+.camera-buttons button { min-height: 36px; min-width: 38px; border: 0; border-right: 1px solid #dce0d8; background: transparent; padding: 6px 12px; font-size: 13px; font-weight: 600; color: #35483d; }
+.camera-buttons button:first-child, .camera-buttons button:nth-child(2) { font-size: 19px; line-height: 1; }
+.camera-buttons button:last-child { border: 0; }
+.camera-buttons button:hover { background: var(--verde-claro); }
+.camera-tools p { font-size: 10.5px; color: var(--tinta-2); margin-top: 7px; }
+.ajuda-touch { display: none; }
+@media (pointer: coarse) { .ajuda-desktop { display: none; } .ajuda-touch { display: inline; } }
+.cena-rodape { position: absolute; left: 26px; bottom: 18px; font-size: 11px; color: var(--tinta-3); pointer-events: none; }
+#diagnostics { position: absolute; right: 18px; bottom: 18px; font: 11px ui-monospace, monospace; background: #1f2a24d9; color: #fff; padding: 6px 9px; border-radius: 6px; }
+#loading { position: absolute; inset: 0; display: grid; place-items: center; background: #e6eae5; font-size: 15px; color: var(--tinta-2); z-index: 5; }
+.aviso { position: absolute; top: 80px; left: 26px; background: #fff3d6; border: 1px solid #efd9a3; padding: 8px 12px; border-radius: 8px; font-size: 12px; }
+
+/* sidebar */
+.sidebar { border-left: 1px solid var(--linha); background: var(--papel); overflow: auto; display: flex; flex-direction: column; padding: 26px 26px 18px; }
+.painel { flex: 1; }
+.painel h1 { font-size: clamp(26px, 2.4vw, 34px); font-weight: 600; margin: 12px 0 14px; }
+.intro { font-size: 15px; color: var(--tinta-2); margin-bottom: 20px; }
+.nota-botao { font-size: 12px; color: var(--tinta-3); margin: 10px 0 18px; }
+.rota { list-style: none; margin: 0 0 18px; padding: 0; border-top: 1px solid var(--linha); }
+.rota li { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--linha); }
+.rota li span { font-size: 11px; font-weight: 700; color: var(--terracota); padding-top: 4px; min-width: 22px; }
+.rota strong { display: block; font-size: 14px; }
+.rota p { font-size: 13px; color: var(--tinta-2); }
+#painelEstacao > p, #painelRecap > p { font-size: 14px; color: var(--tinta-2); margin-top: 8px; }
+.card-sequencia { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; margin: 14px 0 4px; }
+.card-sequencia span { font-size: 11px; font-weight: 600; background: #eef0e8; border: 1px solid #e0e5da; border-radius: 6px; padding: 6px 9px; }
+.card-sequencia b { font-size: 12px; color: var(--tinta-3); font-weight: 400; }
+.card-observacao { border-top: 1px solid var(--linha); margin-top: 16px; padding-top: 4px; min-height: 96px; }
+.card-observacao .card-label { color: var(--terracota); }
+.card-observacao p { font-size: 15px; margin-top: 8px; }
+.card-observacao.is-takeaway { border-top-color: #afc2aa; }
+.card-observacao.is-takeaway .card-label { color: var(--verde); }
+.card-observacao.is-takeaway p { font-weight: 600; }
+.dados { font: 12px ui-monospace, monospace; color: var(--tinta-2); background: #eef0e8; border-radius: 6px; padding: 6px 8px; margin-top: 10px !important; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.guia-nota { margin-top: 18px; padding: 12px 14px; border-radius: 10px; background: #fff6e3; border: 1px solid #f1dfb6; font-size: 13px; color: #5a4520; }
+.estacoes-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 18px; }
+.estacao-botao { border: 1px solid var(--linha); background: var(--papel); border-radius: 8px; padding: 8px 6px; font-size: 12px; font-weight: 600; color: var(--tinta-2); }
+.estacao-botao.feita { border-color: #afc2aa; }
+.estacao-botao.ativa { background: var(--verde); color: #fff; border-color: var(--verde); }
+.rodape { margin-top: 14px; }
+.rodape small { display: block; font-size: 11px; color: var(--tinta-3); margin-top: 4px; }
+dialog { border: 1px solid var(--linha); border-radius: 14px; padding: 24px; max-width: 460px; box-shadow: var(--sombra); }
+dialog::backdrop { background: rgba(31, 42, 36, .35); }
+dialog ul { padding-left: 18px; font-size: 14px; } dialog p { font-size: 13px; color: var(--tinta-2); margin: 12px 0 16px; }
+
+/* cinema / world tour */
+body.cinema .app { grid-template-columns: 1fr; }
+body.cinema .sidebar, body.cinema .cena-rotulo, body.cinema .camera-tools, body.cinema .cena-rodape { display: none; }
+.tour-ui { position: absolute; inset: 0; pointer-events: none; outline: none; }
+.tour-topo { position: absolute; top: 22px; left: 26px; right: 26px; }
+.tour-legenda { font-size: 15px; color: var(--tinta-2); margin-top: 6px; max-width: 520px; }
+.tour-ui.tem-card .tour-legenda { display: none; }
+.tour-barra-progresso { position: absolute; top: -10px; left: 0; right: 0; height: 3px; background: #d5dad2; border-radius: 2px; overflow: hidden; }
+#tourProgresso { height: 100%; width: 0; background: var(--ambar); transition: width .2s linear; }
+.tour-card { position: absolute; right: 4.5%; top: 50%; transform: translateY(-50%); width: clamp(300px, 27vw, 360px); max-height: calc(100dvh - 190px); overflow: auto; pointer-events: auto; padding: 22px 24px; background: var(--papel); border: 1px solid #d7ddd2; border-radius: 15px; box-shadow: var(--sombra); }
+.card-cabeca { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; }
+.card-cabeca .mascote-icone { width: 30px; height: 26px; font-size: 11px; }
+.tour-card h2 { font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+.tour-card > p { font-size: 14px; color: var(--tinta-2); margin-top: 8px; }
+.tour-ui.pausado .tour-card { box-shadow: 0 0 0 3px var(--amarelo), var(--sombra); }
+.tour-controles { position: absolute; left: 26px; bottom: 26px; display: flex; gap: 8px; align-items: center; pointer-events: auto; flex-wrap: wrap; }
+.vel { display: inline-flex; gap: 4px; }
+
+/* mobile */
+@media (max-width: 760px) {
+  :root { --topo-h: auto; }
+  .topo { height: auto; padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .topo-nav { justify-content: flex-start; }
+  .topo-nav .botao { padding: 7px 10px; font-size: 12px; }
+  .app { grid-template-columns: 1fr; height: auto; }
+  .viewport { height: 56dvh; min-height: 360px; }
+  body[data-view="painelEstacao"] .viewport { position: sticky; top: 0; z-index: 2; box-shadow: 0 6px 16px rgba(38, 59, 36, .08); }
+  .cena-rotulo { top: 14px; left: 16px; right: 16px; } .cena-rotulo h2 { font-size: 20px; }
+  .camera-tools { left: 16px; right: 16px; bottom: 36px; } .camera-tools p { font-size: 9.5px; }
+  .cena-rodape { left: 16px; bottom: 12px; }
+  .sidebar { border-left: 0; border-top: 1px solid var(--linha); padding: 20px 16px 16px; }
+  /* cinema no celular: sem cabeçalho, cena nos 45% de cima, card fixo embaixo — nunca por cima da demonstração */
+  body.cinema .topo { display: none; }
+  body.cinema .app { height: 100dvh; }
+  body.cinema .viewport { height: 45dvh; min-height: 0; }
+  .tour-topo { top: 12px; left: 16px; right: 16px; }
+  .tour-card { position: fixed; left: 16px; right: 16px; top: calc(45dvh + 8px); bottom: 66px; transform: none; width: auto; max-height: none; padding: 14px 16px; border-radius: 12px; }
+  .tour-controles { position: fixed; left: 16px; right: 16px; bottom: 12px; }
+  .tour-card h2 { font-size: 19px; } .tour-card > p { font-size: 12.5px; }
+  .card-sequencia span { padding: 4px 6px; font-size: 10px; }
+  .card-observacao { min-height: 64px; } .card-observacao p { font-size: 13px; }
+
+  .tour-controles .botao { padding: 7px 10px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { #tourProgresso { transition: none; } }

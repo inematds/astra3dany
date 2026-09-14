@@ -1,0 +1,10 @@
+BUILD A LEARNING WORLD — COMMUNITY STARTER KIT
+
+1. Open learning-world-build-prompt.txt. Keep the Claude example or edit the project brief.
+2. Attach claude-identity-reference.png and claude-depth-reference.png to your coding agent.
+3. Paste the complete prompt. The agent needs local files, a terminal, Blender, and a browser.
+4. Review one complete station before expanding to all three.
+
+The flat image defines character identity. The figurine image defines depth and volume.
+The kit contains references and a build brief, not a finished 3D model or application.
+Community-created teaching material; not an official certification course.

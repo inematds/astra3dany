@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Um mundo 3D em miniatura que ensina três hábitos pra usar IA no dia a dia. Feito com Babylon.js seguindo a receita 'Build a Learning World'." />
+  <title>IA no dia a dia — astra3dany</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='8' width='26' height='16' rx='4' fill='%23e0973a'/%3E%3Ccircle cx='11' cy='16' r='2.5' fill='%231c211f'/%3E%3Ccircle cx='21' cy='16' r='2.5' fill='%231c211f'/%3E%3C/svg%3E" />
+</head>
+<body data-view="painelInicio">
+  <header class="topo">
+    <div class="marca">
+      <span class="mascote-icone" aria-hidden="true">•‿•</span>
+      <div><strong id="marcaTitulo">IA no dia a dia</strong><small id="marcaSub">astra3dany · mundo de aprendizagem</small></div>
+    </div>
+    <nav class="topo-nav" aria-label="Navegação principal">
+      <button id="btnTour" class="botao primario">World Tour</button>
+      <button id="btnInicio" class="botao">Visão geral</button>
+      <button id="btnRecap" class="botao">Os três hábitos</button>
+      <button id="btnMovimento" class="botao" aria-pressed="false" title="Pula as animações de câmera">Reduzir movimento</button>
+    </nav>
+  </header>
+
+  <main class="app">
+    <section class="viewport" aria-label="Mundo 3D">
+      <canvas id="world" tabindex="0" aria-label="Palco 3D. Arraste pra orbitar, role pra aproximar, shift+arraste pra deslocar, R pra resetar."></canvas>
+      <div class="cena-rotulo"><span id="cenaKicker" class="eyebrow"></span><h2 id="cenaTitulo"></h2></div>
+      <div class="camera-tools">
+        <div class="camera-buttons" role="group" aria-label="Câmera">
+          <button id="camMais" aria-label="Aproximar">+</button>
+          <button id="camMenos" aria-label="Afastar">−</button>
+          <button id="camReset">Reset</button>
+        </div>
+        <p><span class="ajuda-desktop">Arraste pra orbitar · role pra aproximar · shift+arraste pra deslocar · setas, +, −, R no teclado</span><span class="ajuda-touch">Um dedo orbita · dois dedos aproximam e deslocam</span></p>
+      </div>
+      <div class="cena-rodape"><span id="viewLabel">O palco inteiro</span></div>
+      <div id="diagnostics" hidden aria-live="off"></div>
+      <div id="loading" role="status">Carregando o mundo…</div>
+      <p id="avisoMascote" class="aviso" hidden>O mascote não carregou; o palco continua funcionando.</p>
+
+      <div id="tourUI" class="tour-ui" hidden tabindex="-1" aria-label="World Tour">
+        <div class="tour-topo">
+          <span id="tourKicker" class="eyebrow">WORLD TOUR</span>
+          <p id="tourLegenda" class="tour-legenda"></p>
+          <div class="tour-barra-progresso" aria-hidden="true"><div id="tourProgresso"></div></div>
+        </div>
+        <aside id="tourCard" class="tour-card" hidden aria-live="polite">
+          <div class="card-cabeca"><span class="mascote-icone" aria-hidden="true">•‿•</span><span id="cardEyebrow" class="eyebrow"></span></div>
+          <h2 id="cardTitulo"></h2>
+          <span class="card-label">O QUE VOCÊ ESTÁ VENDO</span>
+          <p id="cardExplicacao"></p>
+          <div id="cardSequencia" class="card-sequencia"></div>
+          <div id="cardObservacaoBloco" class="card-observacao"><span id="cardRotulo" class="card-label">O QUE ESTÁ ACONTECENDO</span><p id="cardObservacao"></p><p id="cardDados" class="dados" hidden></p></div>
+          <button id="btnCardPausa" class="texto-botao">Pausar pra ler</button>
+        </aside>
+        <div class="tour-controles">
+          <button id="btnTourPausa" class="botao primario">Pausar</button>
+          <button id="btnTourReiniciar" class="botao">Reiniciar</button>
+          <div class="vel" role="group" aria-label="Velocidade"><button data-vel="0.75" class="botao">0,75×</button><button data-vel="1" class="botao" aria-pressed="true">1×</button></div>
+          <button id="btnTourSair" class="botao">Sair</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <section id="painelInicio" class="painel">
+        <span class="eyebrow">UM JEITO DIFERENTE DE APRENDER</span>
+        <h1 id="inicioTitulo"></h1>
+        <p id="inicioIntro" class="intro"></p>
+        <button id="btnIniciarTour" class="botao primario grande">Fazer o World Tour (1 min)</button>
+        <p class="nota-botao">Ou clique numa estação no palco pra explorar no seu ritmo.</p>
+        <ol id="inicioRota" class="rota"></ol>
+        <button id="btnExplorar" class="botao">Explorar estação por estação</button>
+      </section>
+
+      <section id="painelEstacao" class="painel" hidden>
+        <span id="estacaoKicker" class="eyebrow"></span>
+        <h1 id="estacaoTitulo"></h1>
+        <p id="estacaoSub" class="intro"></p>
+        <span class="card-label">O QUE VOCÊ ESTÁ VENDO</span>
+        <p id="estacaoExplicacao"></p>
+        <div id="estacaoSequencia" class="card-sequencia"></div>
+        <div id="observacaoBloco" class="card-observacao"><span id="faseLabel" class="card-label"></span><p id="observacao"></p><p id="estacaoDados" class="dados" hidden></p></div>
+        <div class="acoes">
+          <button id="btnDemo" class="botao primario">Ver de perto e rodar</button>
+          <button id="btnAmpla" class="botao">Vista ampla</button>
+          <button id="btnProxima" class="botao">Próxima estação →</button>
+        </div>
+        <p id="guiaNota" class="guia-nota"></p>
+      </section>
+
+      <section id="painelRecap" class="painel" hidden>
+        <span class="eyebrow">O QUE FICA</span>
+        <h1 id="recapTitulo" tabindex="-1"></h1>
+        <p id="recapTexto" class="intro"></p>
+        <ol id="recapLista" class="rota"></ol>
+        <div class="acoes"><button id="btnRecapTour" class="botao primario">Rever o World Tour</button><button id="btnRecapExplorar" class="botao">Explorar de novo</button></div>
+      </section>
+
+      <nav class="estacoes-nav" aria-label="Estações">
+        <button class="estacao-botao">01</button><button class="estacao-botao">02</button><button class="estacao-botao">03</button>
+      </nav>
+      <footer class="rodape">
+        <button id="btnFontes" class="texto-botao">Fontes e créditos</button>
+        <small>Sem IA ao vivo: as demonstrações são animações determinísticas. Receita do field guide "Build a Learning World".</small>
+      </footer>
+    </aside>
+  </main>
+
+  <dialog id="dlgFontes">
+    <h2>Fontes e créditos</h2>
+    <ul id="listaFontes"></ul>
+    <p>Mascote e cenário gerados em código (Babylon.js). Receita, ritmo de câmera e checklist vêm do field guide de Mark Kashef pra comunidade Early AI Adopters.</p>
+    <button id="btnFecharFontes" class="botao">Fechar</button>
+  </dialog>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
