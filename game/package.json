@@ -7,7 +7,7 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "dev": "vite --host 127.0.0.1 --port 43220",
-    "build": "vite build --base=./",
+    "build": "vite build --base=./ --outDir ../app --emptyOutDir",
     "preview": "vite preview --host 127.0.0.1 --port 43221"
   },
   "keywords": [],
